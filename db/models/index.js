@@ -2,6 +2,8 @@ const { User, UserSchema } = require('./user.model');
 const { Customer, CustomerSchema } = require('./customer.model');
 const { Product, ProductSchema } = require('./product.model');
 const { Category, CategorySchema } = require('./category.model');
+const { Order, OrderSchema } = require('./order.model');
+const { OrderProduct, OrderProductSchema } = require('./order-product.model');
 
 /* Esta funcion recive todos los modelos que tengamos, para centralizarlos, esta funcion se corre en sequelize.js Esto se hace para que el ORM pueda hacer
 modificaciones a la base de datos 
@@ -15,12 +17,17 @@ function setupModels(sequelize) {
     Product.init(ProductSchema, Product.config(sequelize));
     //Modelo de category
     Category.init(CategorySchema, Category.config(sequelize));
+    //Modelo de order
+    Order.init(OrderSchema, Order.config(sequelize));
+    //Modelo de relacion order-product
+    OrderProduct.init(OrderProductSchema, OrderProduct.config(sequelize));
 
     //Las asociaciones se ponen al final de todos los inits
-    User.associate(sequelize.models)
-    Customer.associate(sequelize.models)
-    Category.associate(sequelize.models)
-    Product.associate(sequelize.models)
+    User.associate(sequelize.models);
+    Customer.associate(sequelize.models);
+    Category.associate(sequelize.models);
+    Product.associate(sequelize.models);
+    Order.associate(sequelize.models);
 };
 
 module.exports = setupModels;

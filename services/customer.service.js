@@ -23,7 +23,7 @@ class CustomerService {
         if (!customer) {
             throw boom.notFound('Customer not found');
         }
-        return costumer;
+        return custumer;
     }
 
     async update(id, changes){
