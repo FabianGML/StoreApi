@@ -33,6 +33,6 @@ module.exports = {
   },
 
   async down (queryInterface) {
-    await queryInterface.droptable(USER_TABLE);
+    await queryInterface.dropTable(USER_TABLE);
   }
 };
