@@ -7,7 +7,7 @@ const { createOrderSchema, getOrderSchema, addItemSchema } = require('../schemas
 const router = express.Router();
 const service = new OrderServices();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const orders = await service.find();
         res.json(orders);

@@ -1,0 +1,36 @@
+const { Strategy } =  require('passport-local');
+const boom =  require('@hapi/boom');
+const bcrypt = require('bcrypt');
+
+
+const UserService = require('./../../../services/user.service');
+const service = new UserService();
+
+const localStrategy = new Strategy({
+        /*-------------------------------------------------------------
+        Por defecto, esta estrategia recive el campo username y password, 
+        si queremos cambiar el nombre de esos campos, se utilizan los 
+        siguientes atributos
+        // passwordField 
+        ----------------------------------------------------------------*/
+        usernameField: 'email',
+    },
+    async (email, password, done) => {
+    try {
+        const user = await service.findByEmail(email);
+        if(!user){
+            done(boom.unauthorized(), false);
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch){
+            done(boom.unauthorized(), false)
+        }
+        delete user.dataValues.password;
+        done(null, user);
+    } catch(error){
+        //Se coloca false, para indicar que no fue posible hacer la validacion
+        done(error, false);
+    }
+});
+
+module.exports = localStrategy;

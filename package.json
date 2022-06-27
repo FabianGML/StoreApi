@@ -10,7 +10,7 @@
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
     "migrations:revert": "sequelize-cli db:migrate:undo",
-    "migrations:delete": "sequelize-cli db:migrate:undo:all" 
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
@@ -19,16 +19,19 @@
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "nodemon": "^2.0.16",
+    "nodemon": "^2.0.18",
     "prettier": "^2.6.2"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "faker": "^5.5.3",
     "joi": "^17.6.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.20.0",

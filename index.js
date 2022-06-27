@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
 
+const { checkApiKey } = require('./middlewares/auth.handler');
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler} = require('./middlewares/error.handler');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +21,9 @@ const whitelist = ['http://localhost:3000/', 'https://git.heroku.com/my-store-ex
 // }
 //app.use(cors(options));//Con la configuracion app.use(cors()) se le permite a cualquier aplicacion front-end conectarse a la api
 
-app.get('/', (req, res) => {
+//Cuando se deja asi, busca automaticamente el archvio index.js
+require('./utils/auth');
+app.get('/', checkApiKey, (req, res) => {
     res.send('Express App');
 })
 
