@@ -5,8 +5,12 @@ class OrderService {
     
     constructor(){}
 
-    async create(data){
-        const newOrder = await models.Order.create(data)
+    async create(userId){
+        const user = await this.findByUser(parseInt(userId));
+        const customerId = user[0].dataValues.customerId
+        const newOrder = await models.Order.create({
+            customerId
+        })
         return newOrder;    
     }
 
@@ -18,6 +22,20 @@ class OrderService {
     async find(){
         const rta = await models.Order.findAll();
         return rta;
+    }
+
+    async findByUser(userId){
+        const orders = await models.Order.findAll({
+            where: {
+                //De esta forma se hacen consultas where, cuando son asociaciones 
+                '$customer.user.id$': userId
+            },
+            include: {
+                association: 'customer',
+                include:['user']
+            }
+        });
+        return orders;
     }
 
     async findOne(id){

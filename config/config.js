@@ -11,6 +11,9 @@ const config = {
     // dbPort: process.env.DB_PORT,
     dbUrl: process.env.DATABASE_URL,
     apiKey: process.env.API_KEY,
+    jwtSecret: process.env.JWT_SECRET,
+    nodeMail: process.env.NODE_MAIL,
+    mailPass: process.env.NODE_MAIL_PASS,
 }
 
 module.exports = { config };
